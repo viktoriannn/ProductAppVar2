@@ -1,0 +1,92 @@
+﻿<Window x:Class="ProductDemo.View.AddEditOrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Заказ" Height="600" Width="900" Loaded="Window_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Name="orderCard" Margin="0,0,10,0" >
+                    <StackPanel Name="IdPanel">
+                        <TextBlock Text="ID заказа:"/>
+                        <TextBox Name="IdTxt" IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Код получения:"/>
+                    <TextBox Name="CodeTxt" IsReadOnly="True"/>
+
+                    <TextBlock Text="Дата заказа:"/>
+                    <DatePicker Name="OrderDatePick"/>
+
+                    <TextBlock Text="Дата доставки:"/>
+                    <DatePicker Name="DeliveryDatePick"/>
+
+                    <TextBlock Text="Клиент:"/>
+                    <ComboBox Name="UserBox" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+
+                    <TextBlock Text="Пункт выдачи:"/>
+                    <ComboBox Name="PvzBox" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+
+                    <TextBlock Text="Статус:"/>
+                    <ComboBox Name="StatusBox"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Состав заказа:" FontWeight="Bold"/>
+
+                    <TextBlock Text="Товар:"/>
+                    <ComboBox Name="ProductBox" DisplayMemberPath="Name" SelectedValuePath="Id"/>
+
+                    <TextBlock Text="Количество:"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox Name="ItemCountTxt" Text="1"/>
+                        <Button Grid.Column="1" Content="Добавить в заказ"
+                                Name="AddItemBtn" Click="AddItemBtn_Click" Margin="3,0"/>
+                    </Grid>
+
+                    <DataGrid Name="ItemsGrid" Height="250" Margin="0,5" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False"> 
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Товар" Binding="{Binding Name}" Width="*"/>
+                            <DataGridTextColumn Header="Цена" Binding="{Binding FinalPrice, StringFormat={}{0:N2}}" Width="80"/>
+                            <DataGridTextColumn Header="Кол-во" Binding="{Binding Count}" Width="60"/>
+                            <DataGridTextColumn Header="Сумма" Binding="{Binding Sum, StringFormat={}{0:N2}}" Width="85"/>
+                            <DataGridTemplateColumn Header="" Width="75">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Удалить" Background="#00FA9A" Click="DelItemBtn_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <TextBlock Name="TotalTxt" FontWeight="Bold" FontSize="16"
+                               HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+
+        <Button Grid.Row="1" Content="Назад" Name="BackBtn"
+                Click="BackBtn_Click" Margin="3" Width="150"
+                HorizontalAlignment="Left" Background="#00FA9A"/>
+
+        <Button Grid.Row="1" Content="Сохранить заказ" Name="SaveOrderBtn"
+                Click="SaveOrderBtn_Click" Margin="3" Width="150"
+                HorizontalAlignment="Right"/>
+    </Grid>
+</Window>

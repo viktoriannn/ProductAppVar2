@@ -30,13 +30,13 @@ namespace ProductDemo.View
                 _messageService.Error("Неверный логин или пароль");
                 return;
             }
-            new MainWindow(user).Show();
+            new ProductsWindow(user).Show();
             Close();
         }
 
-        private void TextBlock_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void LogGhostBtn_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            new MainWindow().Show();
+            new ProductsWindow().Show();
             Close();
         }
     }

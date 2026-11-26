@@ -14,7 +14,7 @@
             <TextBlock Text="Пароль:" Margin="2"/>
             <PasswordBox Name="passwordTxt" />
             <Button Content="Войти" Name="LogBtn" Click="LogBtn_Click" Margin="2"/>
-            <TextBlock Text="Войти как гость" HorizontalAlignment="Center" MouseDown="TextBlock_MouseDown"/>
+            <TextBlock Text="Войти как гость" Name="LogGhostBtn" HorizontalAlignment="Center" MouseDown="LogGhostBtn_MouseDown"/>
         </StackPanel>
     </Grid>
 </Window>

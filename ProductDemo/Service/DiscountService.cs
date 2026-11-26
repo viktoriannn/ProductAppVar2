@@ -4,7 +4,10 @@
     {
         public decimal GetDiscount(decimal? discount)
         {
-            return discount ?? 0;
+            if (discount == null)
+                return 0;
+            else
+                return discount.Value;
         }
 
         public bool HasDiscount(decimal? discount)
@@ -12,7 +15,6 @@
             return GetDiscount(discount) > 0;
         }
 
-        // Скидка больше 15% - строка подсвечивается #2E8B57
         public bool IsHighDiscount(decimal? discount)
         {
             return GetDiscount(discount) > 15;
