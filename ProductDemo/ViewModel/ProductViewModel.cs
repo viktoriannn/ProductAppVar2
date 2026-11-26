@@ -26,9 +26,10 @@ namespace ProductDemo.ViewModel
         public decimal FinalPrice => _priceService.GetFinalPrice(Price, Discount);
 
         public string DiscountText => _priceService.GetDiscountText(Discount);
+        //если скидка есть, то скидку видно и наоборот, если скидки нет, то скрывается
         public Visibility DiscountVisibility =>
             HasDiscount ? Visibility.Visible : Visibility.Collapsed;
-
+        //кнопкка удаления видна только администратору
         public Visibility DeleteVisibility =>
             CanDelete ? Visibility.Visible : Visibility.Collapsed;
         public Brush Background

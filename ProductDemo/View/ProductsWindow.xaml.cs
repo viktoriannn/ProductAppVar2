@@ -6,6 +6,8 @@ using ProductDemo.ViewModel;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 namespace ProductDemo
 {
     public partial class ProductsWindow : Window
@@ -159,6 +161,7 @@ namespace ProductDemo
 
         private void DelBtn_Click(object sender, RoutedEventArgs e)
         {
+            e.Handled = true;
             if (!_isAdmin)
                 return;
             Button button = (Button)sender;
@@ -188,28 +191,17 @@ namespace ProductDemo
             }
         }
 
-        private void ProductCard_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ProductCard_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (!_isAdmin)
                 return;
-            if (IsInsideButton(e.OriginalSource as DependencyObject))
-                return;
+
             Border card = (Border)sender;
             ProductViewModel product = (ProductViewModel)card.DataContext;
+
             OpenEditor(product);
         }
-        private static bool IsInsideButton(DependencyObject? element)
-        {
-            while (element != null)
-            {
-                if (element is Button)
-                    return true;
-                element = element is System.Windows.Media.Visual
-                    ? System.Windows.Media.VisualTreeHelper.GetParent(element)
-                    : LogicalTreeHelper.GetParent(element);
-            }
-            return false;
-        }
+
         private void FilterBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             FindSortFilter();

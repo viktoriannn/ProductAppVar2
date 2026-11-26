@@ -34,7 +34,7 @@ namespace ProductDemo.View
                 _id = order.Id;
             }
         }
-
+        //обновление данных при загрузке окна
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
@@ -263,6 +263,7 @@ namespace ProductDemo.View
             _order.Status = StatusBox.SelectedItem.ToString()!;
 
             int itemId = (_db.OrderItems.Max(i => (int?)i.IdOrderItem) ?? 0) + 1;
+            //удаление старых позиций заказа и добавление обновлённых
             _db.OrderItems.RemoveRange(_order.OrderItems.ToList());
             foreach (var line in _items)
             {
